@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Form from "./Form";
-// import Products from "./Products";
+import MedicinesList from "./MedicinesList";
 
 function Home() {
   const [medicinesList, setMedicinesList] = useState([]);
 
-  const addMedicineHandler = (newMedicine) => {};
-
-  const deleteProductHandler = (id) => {
-    const filteredProducts = medicinesList.filter((each) => each.id !== id);
-    localStorage.setItem("products", JSON.stringify(filteredProducts));
-    setMedicinesList(filteredProducts);
+  const addMedicineHandler = (newMedicine) => {
+    const newMedicines = [...medicinesList, newMedicine];
+    localStorage.setItem("medicines", JSON.stringify(newMedicines));
+    setMedicinesList(newMedicines);
   };
 
   useEffect(() => {
-    const list = localStorage.getItem("products");
+    const list = localStorage.getItem("medicines");
     if (list) {
       setMedicinesList(JSON.parse(list));
     }
@@ -23,8 +21,7 @@ function Home() {
   return (
     <>
       <Form onAddMedicine={addMedicineHandler} />
-
-      {/* <Products medicinesList={medicinesList} onDelete={deleteProductHandler} /> */}
+      <MedicinesList medicines={medicinesList} />
     </>
   );
 }
