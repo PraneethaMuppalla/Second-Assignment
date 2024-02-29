@@ -41,11 +41,11 @@
 
 .control input:focus {
   outline: none;
-  border-color: #4f005f;
-  background: #f6dbfc;
+  border-color: #2c5f2d;
+  background: #d8f0d8;
 }
 .control select:focus {
-  border-color: #4f005f;
+  border-color: #2c5f2d;
 }
 .control.invalid select {
   border-color: red;

@@ -1,20 +1,21 @@
 import React, { useContext } from "react";
 
-// import CartContext from "../../../context/cart-context";
-// import MealItemForm from "./MealItemForm";
+import CartContext from "../../../context/cart-context";
+import MedicineItemForm from "./MedicineItemForm";
 import classes from "./MedicineItem.module.css";
 
 const MedicineItem = (props) => {
-  // const ctx = useContext(CartContext);
+  const ctx = useContext(CartContext);
 
   const addToCartHandler = (amount) => {
-    // const newItem = {
-    //   id: props.id,
-    //   name: props.name,
-    //   amount,
-    //   price: props.price,
-    // };
-    // ctx.addItem(newItem);
+    const newItem = {
+      id: props.id,
+      name: props.name,
+      description: props.description,
+      quantity: amount,
+      price: props.price,
+    };
+    ctx.addItem(newItem);
   };
 
   return (
@@ -24,13 +25,16 @@ const MedicineItem = (props) => {
         <h4 className={classes.description}>{props.description}</h4>
         <h4 className={classes.price}>Rs. {props.price}</h4>
         <h4 className={classes.price}>
-          {" "}
           {props.quantity === 0 ? "No Quantity" : props.quantity}
         </h4>
       </div>
-      {/* <div>
-        <MealItemForm id={props.id} onAddToCart={addToCartHandler} />
-      </div> */}
+      <div>
+        <MedicineItemForm
+          id={props.id}
+          onAddToCart={addToCartHandler}
+          quantity={props.quantity}
+        />
+      </div>
     </li>
   );
 };

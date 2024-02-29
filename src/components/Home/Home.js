@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Form from "./Form";
 import MedicinesList from "./MedicinesList";
+import CartContext from "../../context/cart-context";
 
 function Home() {
-  const [medicinesList, setMedicinesList] = useState([]);
+  const ctx = useContext(CartContext);
 
   const addMedicineHandler = (newMedicine) => {
-    const newMedicines = [...medicinesList, newMedicine];
-    localStorage.setItem("medicines", JSON.stringify(newMedicines));
-    setMedicinesList(newMedicines);
+    ctx.addMedicine(newMedicine);
   };
-
-  useEffect(() => {
-    const list = localStorage.getItem("medicines");
-    if (list) {
-      setMedicinesList(JSON.parse(list));
-    }
-  }, []);
 
   return (
     <>
       <Form onAddMedicine={addMedicineHandler} />
-      <MedicinesList medicines={medicinesList} />
+      <MedicinesList medicines={ctx.totalProducts} />
     </>
   );
 }
