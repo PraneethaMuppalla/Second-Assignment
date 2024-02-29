@@ -1,7 +1,15 @@
-import React from "react";
+import MainHeader from "./components/Header/MainHeader";
+import Home from "./components/Home/Home";
 
 function App() {
-  return <h1>Hello there</h1>;
+  return (
+    <>
+      <MainHeader />
+      <main>
+        <Home />
+      </main>
+    </>
+  );
 }
 
 export default App;
