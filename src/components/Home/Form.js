@@ -1,6 +1,5 @@
 import React, { useReducer, useEffect, useRef } from "react";
 
-import Card from "../UI/Card/Card";
 import classes from "./Form.module.css";
 import Button from "../UI/Button/Button";
 
@@ -136,7 +135,7 @@ const Form = (props) => {
   }, []);
 
   return (
-    <Card className={classes.login}>
+    <div className={classes.login}>
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
@@ -198,7 +197,7 @@ const Form = (props) => {
           <Button type="submit">Add Product</Button>
         </div>
       </form>
-    </Card>
+    </div>
   );
 };
 

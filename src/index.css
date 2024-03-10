@@ -4,6 +4,7 @@
 
 html {
   background: #ffffff;
+  font-family: "Noto Serif", serif;
 }
 
 body {
@@ -11,5 +12,5 @@ body {
 }
 
 main {
-  margin-top: 4.5rem;
+  margin-top: 5rem;
 }

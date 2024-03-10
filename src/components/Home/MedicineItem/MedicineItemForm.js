@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import classes from "./MedicineItemForm.module.css";
 
@@ -7,11 +7,12 @@ const MedicineItemForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setAmount(1);
     props.onAddToCart(+amount);
   };
   return (
     <>
-      {props.quantity == 0 ? (
+      {+props.quantity === 0 ? (
         <p>No Product</p>
       ) : (
         <form className={classes.form} onSubmit={submitHandler}>

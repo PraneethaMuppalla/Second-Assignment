@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-
+import React, { useReducer, useEffect } from "react";
+import axios from "axios";
 import CartContext from "./cart-context";
 
 const defaultCartState = {
@@ -97,6 +97,13 @@ const cartReducer = (state, action) => {
     let newTotalProducts = [...state.totalProducts, action.newMedicine];
     return { ...state, totalProducts: newTotalProducts };
   }
+  if (action.type === "INITIAL_STATE") {
+    const cartItems = action.cart;
+    const totalAmount = cartItems.reduce((acc, curr) => {
+      return acc + curr.price * curr.quantity;
+    }, 0);
+    return { totalProducts: action.products, items: cartItems, totalAmount };
+  }
   return defaultCartState;
 };
 
@@ -123,6 +130,28 @@ const CartProvider = (props) => {
       newMedicine,
     });
   };
+  const getProducts = async () => {
+    try {
+      const response = await axios.get(
+        `https://crudcrud.com/api/c7ef1ef2650c4a4a8e958bc635ce9de3/medicine`
+      );
+      const cartRes = await axios.get(
+        `https://crudcrud.com/api/c7ef1ef2650c4a4a8e958bc635ce9de3/cart`
+      );
+
+      dispatchCartAction({
+        type: "INITIAL_STATE",
+        products: response.data,
+        cart: cartRes.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   const cartContext = {
     items: cartState.items,
